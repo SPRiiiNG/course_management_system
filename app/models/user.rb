@@ -40,9 +40,21 @@ class User
   field :nickname,                type: String
   field :birthday,                type: DateTime
   field :gender,                  type: String, default: 'male'
+  field :instructor,              type: Boolean, default: false
 
   #Validations
   validates_presence_of :first_name, :last_name, :nickname
   validates_inclusion_of :gender, :in => %w( male female ), :message => "extension %s is not included in the list"
+
+  has_many :courses, class_name: 'Course'
+
+  def add_course(course)
+    errors.add(:base, :invalid, message: "student can't create course") and (return false) unless self.instructor
+    self.courses << course
+  end
+
+  def remove_course(course)
+    self.courses.find(course).destroy rescue nil
+  end
 
 end
