@@ -148,7 +148,7 @@ development:
 test:
   clients:
     default:
-      database: course_management_system_test
+      database: course_management_system_test_<%= ENV['TEST_ENV_NUMBER'] %>
       hosts:
         - localhost:27017
       options:
