@@ -5,3 +5,8 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+puts "Generate seeds in #{Rails.env}"
+start_time = Time.now
+require File.join(Rails.root, "db", "seeds", "#{Rails.env}.rb")
+end_time = Time.now
+puts "--time duration #{end_time-start_time} seconds--"
