@@ -28,7 +28,6 @@ RSpec.describe Category, type: :model do
     describe "#remove_subject" do
       it "should remove subject successfully" do
         category.add_subject(subject_1)
-        category.reload
         expect {
           category.remove_subject(subject_1)
         }.to change(category.subjects, :count).by(-1)

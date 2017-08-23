@@ -8,7 +8,6 @@ class Category
 
   has_many :subjects, class_name: 'Subject'
 
-
   def add_subject(subject)
     self.subjects << subject
   end
