@@ -1,0 +1,70 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ *= require font-awesome
+ */
+@import "bootstrap-sprockets";
+@import "bootstrap";
+@import "font-awesome";
+@import "bootswatch/paper/variables";
+@import "bootswatch/paper/bootswatch";
+@import "bootstrap-datetimepicker";
+@import "variables";
+
+
+navbar-brand {
+  padding: 0px;
+}
+.navbar-brand>img {
+  height: 100%;
+  padding: 9px;
+  padding-left: 10%;
+  width: auto;
+}
+
+html, body {
+  height: 100%;
+  /* The html and body elements cannot have any padding or margin. */
+}
+
+$footer-height: 60px;
+$side-padding: 15px;
+#wrap {
+ min-height: calc(100% - 60px); /* 60px is height of footer */
+ height: auto !important;
+ height: 100%;
+
+ /* Negative indent footer by its height */
+ margin: 0 auto -$footer-height auto;
+
+ /* Pad bottom by footer height */
+ padding: 0 0 $footer-height;
+
+ /* Custom page css */
+ & > .container {
+   padding: $footer-height $side-padding 0;
+ }
+}
+
+#footer {
+ height: $footer-height;
+ background-color: $footer-background;
+ & > .container {
+   padding-left: $side-padding;
+   padding-right: $side-padding;
+   .credit {
+     margin: 20px 0;
+   }
+ }
+}

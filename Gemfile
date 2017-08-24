@@ -23,6 +23,7 @@ gem 'jquery-ui-rails'
 gem 'jbuilder', '~> 2.5'
 gem "font-awesome-rails"
 gem 'bootstrap-sass', '~> 3.3.6'
+gem 'bootswatch-rails'
 gem 'angularjs-rails'
 gem 'bootstrap3-datetimepicker-rails', '~> 4.17.47'
 

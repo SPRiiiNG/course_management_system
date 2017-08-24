@@ -1,0 +1,11 @@
+<% if @breadcrumbs %>
+  <ol class="breadcrumb crumb-show">
+    <%
+      @breadcrumbs.each do |crumb|
+        link = link_to crumb[0], crumb[1], target: '_self'
+        class_name = 'active' and link = crumb[0] if crumb == @breadcrumbs.last and crumb[1] != root_path
+    %>
+      <li class='<%= class_name || '' %>'><%= link %></li>
+    <% end %>
+  </ol>
+<% end %>
