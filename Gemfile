@@ -25,6 +25,7 @@ gem "font-awesome-rails"
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'bootswatch-rails'
 gem 'angularjs-rails'
+gem 'momentjs-rails', '>= 2.9.0'
 gem 'bootstrap3-datetimepicker-rails', '~> 4.17.47'
 
 # Database
