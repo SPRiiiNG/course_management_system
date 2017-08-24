@@ -10,4 +10,12 @@ class Course
 
   belongs_to :subject, class_name: 'Subject', inverse_of: :course
   belongs_to :user, class_name: 'User'
+
+  validates :name,
+    presence: true,
+    uniqueness: true
+
+  def category
+    self.subject.category rescue nil
+  end
 end
