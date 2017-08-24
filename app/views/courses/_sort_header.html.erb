@@ -1,0 +1,25 @@
+<% course_fields.each do |field| %>
+  <th>
+    <% link_direction = {'asc' => 'desc', 'desc' => 'asc'} %>
+    <% title_field= {"name" => "Name", "user" => "Instructor", "start_time" => "Start time", "end_time" => "End time", "capacity" => "Capacity"} %>
+    <% link_params['sort'] = "#{field}:#{link_direction[sort['direction']]}" rescue "#{field}:asc" %>
+    <% link_params['course_name'] = params[:course_name] %>
+    <% link_params['start_time'] = params[:start_time] %>
+    <% link_params['end_time'] = params[:end_time] %>
+    <%=
+      link_to courses_path(link_params),
+        class: "table-header-link",
+        target: '' do
+      %>
+      <span >
+        <%= title_field[field] %>
+
+        <% if sort.present? && field.eql?(sort['field']) %>
+          <i class="fa fa-sort-<%= sort['direction'] %>"></i>
+        <% else %>
+          <i class="fa fa-sort"></i>
+        <% end %>
+      </span>
+    <% end %>
+  </th>
+<% end %>

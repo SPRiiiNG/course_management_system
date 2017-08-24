@@ -3,74 +3,68 @@
   <div class="col-md-10">
     <fieldset class="page-option-border">
       <%= form_tag(courses_path, method: "get") do %>
-      <div class="btn-group col-md-3">
-        <div class="row">
-          <div class="col-md-4">
-            <div class="row">
-              <label for="dropdown-driver" class="control-label" >เลือกดูสถิติของ </label>
-            </div>
+      <div class="pull-left" style="font-size: 16px; width: 250px;">
+        <%#= form_tag(courses_path(params[:search]), method: :get) do %>
+          <div class="input-group">
+            <%= text_field_tag 'course_name', params[:course_name], class: 'form-control', placeholder: 'Search by name...' %>
+
+            <%- if params[:search].present? %>
+              <span class="text-muted" style="font-size: 16px;">
+                <%= link_to courses_path(""), class: 'btn-search-clear' do %>
+                  <span class="glyphicon glyphicon-remove"></span>
+                <% end %>
+              </span>
+            <% end %>
+
+            <span class="input-group-btn">
+              <%= link_to courses_path, class: 'btn btn-default', id: 'btn-search' do %>
+                <i class="fa fa-search"></i>
+              <% end %>
+            </span>
           </div>
-          <div class="form-group col-md-8">
-            <div class="row">
-              <div class="input-group">
-                <input type="text" class="form-control" id="name-search" name="name-search" />
-              </div>
-            </div>
-          </div>
-        </div>
+        <%# end %>
       </div>
 
-      <div class="col-md-6">
-        <div class="row">
-          <div class="col-md-2">
-            <center class="control-label" style="align: right;">ตั้งแต่เวลา </center>
-          </div>
-          <div class='col-md-4'>
-            <div class="row">
-              <div class="form-group">
-                <div class='input-group date' id='datetimepicker_start'>
-                    <input type='text' class="form-control" id="start_time" name="start_time" value="<%= @start_time.to_json %>"/>
-                    <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-calendar"></span>
-                    </span>
-                </div>
-              </div>
+
+        <div class="col-md-6">
+          <div class="row">
+            <div class="col-md-2">
+              <center class="control-label" style="align: right;">from </center>
             </div>
-          </div>
-          <div class="col-md-1">
-            <center class="control-label">ถึง</center>
-          </div>
-          <div class='col-md-4'>
-            <div class="row">
-              <div class="form-group">
-                  <div class='input-group date' id='datetimepicker_end'>
-                      <input type='text' class="form-control" id="end_time" name="end_time" value="<%= @end_time.to_json %>"/>
+            <div class='col-md-4'>
+              <div class="row">
+                <div class="form-group">
+                  <div class='input-group date' id='datetimepicker_start'>
+                      <input type='text' class="form-control" id="start_time" name="start_time" value="<%= @start_time.to_json %>"/>
                       <span class="input-group-addon">
                           <span class="glyphicon glyphicon-calendar"></span>
                       </span>
                   </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-1">
+              <center class="control-label">to</center>
+            </div>
+            <div class='col-md-4'>
+              <div class="row">
+                <div class="form-group">
+                    <div class='input-group date' id='datetimepicker_end'>
+                        <input type='text' class="form-control" id="end_time" name="end_time" value="<%= @end_time.to_json %>"/>
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-      <button type="submit" class="btn btn-primary col-md-1">ค้นหา</button>
+        <button type="submit" class="btn btn-primary col-md-1">
+          <i class="fa fa-search" aria-hidden="true"></i>
+        </button>
       <% end %>
       <%#= link_to "Go", reports_path(start_time: "asdsad"), class: "btn btn-primary" %>
-    </fieldset>
-  </div>
-  <div class="col-md-2">
-    <fieldset class="page-option-center">
-      <%= form_tag(export_xlsx_reports_path(), method: "post") do %>
-        <%= hidden_field_tag("table_data", @table_data_row.to_json) %>
-        <%= hidden_field_tag("table_keys", @keys.to_json) %>
-        <%= hidden_field_tag("start_time", @start_time ) %>
-        <%= hidden_field_tag("end_time", @end_time ) %>
-        <%= hidden_field_tag("driver_name", @driver.present? ? @driver.name : "ทุกคน") %>
-        <%= button_tag(type: "submit", class: "btn btn-default") do%>
-          <span class="glyphicon glyphicon-export"></span>ส่งออกรายงาน
-        <% end %>
-      <% end %>
     </fieldset>
   </div>
 </div>
