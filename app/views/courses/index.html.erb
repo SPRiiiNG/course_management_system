@@ -15,7 +15,7 @@
           <%= index+1 %>
         </td>
         <td>
-          <%= course.name %>
+          <%= link_to course.name, course_path(course) %>
         </td>
         <td>
           <%= course.user.full_name %>

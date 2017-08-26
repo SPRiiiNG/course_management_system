@@ -6,6 +6,13 @@ require File.expand_path('../../config/environment', __FILE__)
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 require 'rspec/rails'
 require 'mongoid-rspec'
+require 'database_cleaner'
+
+Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
+
+require 'spec_helper'
+
+DatabaseCleaner[:mongoid].strategy = :truncation
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
@@ -24,7 +31,9 @@ require 'mongoid-rspec'
 # Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 
 RSpec.configure do |config|
+  config.include Devise::Test::ControllerHelpers, type: :controller
   config.include Mongoid::Matchers, type: :model
+  config.include SignInAs
   # RSpec Rails can automatically mix in different behaviours to your tests
   # based on their file location, for example enabling you to call `get` and
   # `post` in specs under `spec/controllers`.
@@ -44,4 +53,10 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
+  config.before(:each) do
+    DatabaseCleaner.clean
+    ActionMailer::Base.deliveries = []
+    FactoryGirl.reload
+    I18n.locale = I18n.default_locale = :en
+  end
 end
