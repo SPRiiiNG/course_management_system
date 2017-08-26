@@ -13,6 +13,7 @@
  *= require_tree .
  *= require_self
  *= require font-awesome
+ *= require bootstrap-select
  */
 @import "bootstrap-sprockets";
 @import "bootstrap";
@@ -22,9 +23,21 @@
 @import "bootstrap-datetimepicker";
 @import "variables";
 
+.color-intro-message {
+  color: grey;
+}
+
+.intro-divider {
+  color: black;
+  width: 400px;
+  border-top: 1px solid #f8f8f8;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
 
 navbar-brand {
   padding: 0px;
+  font-weight: bolder;
 }
 .navbar-brand>img {
   height: 100%;
@@ -67,4 +80,20 @@ $side-padding: 15px;
      margin: 20px 0;
    }
  }
+}
+
+.resize-flash-close {
+  font-size: 50%;
+}
+
+.intro-header {
+  margin-top: -20px;
+  margin-left: -20px;
+  margin-right: -15px;
+  padding-top: 100px; /* If you're making other pages, make sure there is 50px of padding to make sure the navbar doesn't overlap content! */
+  padding-bottom: 200px;
+  color: #f8f8f8;
+  background: asset-url('bg.jpg') no-repeat center center;
+  background-size: cover;
+  text-align: center;
 }
