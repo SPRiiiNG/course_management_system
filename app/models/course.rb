@@ -18,4 +18,8 @@ class Course
   def category
     self.subject.category rescue nil
   end
+
+  def owner?(user)
+    self.user.eql?(user)? true : false
+  end
 end

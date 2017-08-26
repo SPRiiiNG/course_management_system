@@ -2,13 +2,7 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 $(document).ready ->
-#   # JSON.parse('<%= @link.errors.messages.to_json.html_safe%>')
-#   # chart_data_row = '<%= "#{@chart_data_row.to_json}" %>'
-#
-#   show_date = JSON.parse($('#start_time').val()).split(" ")[0]
-#   if $('#start_time').val().split("/")[0] != $('#end_time').val().split("/")[0]
-#     show_date = show_date+" - "+JSON.parse($('#end_time').val()).split(" ")[0]
-#
+
   currentdate = new Date
   cur_date = (currentdate.getMonth()+1)+"/"+currentdate.getDate()+"/"+currentdate.getFullYear()
 
@@ -39,3 +33,25 @@ $(document).ready ->
   setup_attr()
   $('#course_name').on 'change', () ->
     setup_attr()
+
+  set_subject_select = () ->
+    course_subject = JSON.parse($('#course_subject').val())
+    default_subject = ''
+    if course_subject
+      default_subject = course_subject._id.$oid
+
+    category = $('#category_select').val()
+    $('#subject_select').empty()
+    $.each categories_subjects_hash[category]['subjects'], (index, value) ->
+      select_attr = ''
+      select_attr = 'selected="selected"' if value['id'] == default_subject 
+      select_element = '<option value="'+value['id']+'" '+select_attr+' >'+value['name']+'</option>'
+      $('#subject_select').append(select_element)
+      return
+    $('.selectpicker').selectpicker('refresh');
+
+  categories_subjects_hash = JSON.parse($('#categories_subjects_hash').val())
+  set_subject_select()
+
+  $('#category_select').on 'change', () ->
+    set_subject_select()

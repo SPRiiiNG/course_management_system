@@ -16,6 +16,6 @@
 //= require bootstrap-sprockets
 //= require moment
 //= require bootstrap-datetimepicker
+//= require bootstrap-select
 //= require angular
 //= require angular-app
-//= require_tree .

@@ -1,0 +1,11 @@
+<h2>Create course</h2>
+<hr>
+<div class="row">
+  <div class="col-lg-6">
+    <%= form_for(@course, url: courses_path(@course)) do |f| %>
+      <fieldset>
+        <%= render "courses/course_form", f: f, btn_action: 'Create' %>
+      </fieldset>
+    <% end %>
+  </div>
+</div>

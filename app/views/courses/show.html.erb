@@ -2,33 +2,42 @@
 <hr>
 
 <!-- action button -->
-<div class="btn-group">
-  <button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-    <%= t('action') %> <span class="caret"></span>
-  </button>
-  <ul class="dropdown-menu" role="menu">
-    <li>
-      <%= link_to edit_course_path(@course), class: 'text-warning' do %>
-        <i class="fa fa-edit"></i>
-        <%= t('edit') %>
-      <% end %>
-    </li>
-    <li>
-      <%=
-      link_to course_path(@course),
-      method: :delete ,
-      class: 'text-danger',
-        data: {confirm: "Do you want to delete #{@course.name} ?" } do %>
-        <i class="fa fa-trash-o"> Delete</i>
-      <% end %>
-    </li>
-  </ul>
-</div>
+<% if @course.owner?(current_user) %>
+  <div class="btn-group">
+    <button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+      <%= t('action') %> <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu" role="menu">
+      <li>
+        <%= link_to edit_course_path(@course), class: 'text-warning' do %>
+          <i class="fa fa-edit"></i>
+          <%= t('edit') %>
+        <% end %>
+      </li>
+      <li>
+        <%=
+        link_to course_path(@course),
+        method: :delete ,
+        class: 'text-danger',
+          data: {confirm: "Do you want to delete #{@course.name} ?" } do %>
+          <i class="fa fa-trash-o"> Delete</i>
+        <% end %>
+      </li>
+    </ul>
+  </div>
+  <br />
+  <br />
+<% end %>
+
 
 <div class="row">
   <div class="col-lg-10">
     <div class="well">
       <dl class="dl-horizontal">
+        <dt>Category:</dt>
+          <dd><%= @course.subject.category.name %></dd>
+        <dt>Subject:</dt>
+          <dd><%= @course.subject.name %></dd>
         <dt>Course name:</dt>
           <dd><%= @course.name %></dd>
         <dt>Description:</dt>

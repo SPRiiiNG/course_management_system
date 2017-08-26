@@ -1,0 +1,11 @@
+<h2>Edit course</h2>
+<hr>
+<div class="row">
+  <div class="col-lg-6">
+    <%= form_for(@course, url: course_path(@course.id.to_s)) do |f| %>
+      <fieldset>
+        <%= render "courses/course_form", f: f, btn_action: 'Edit' %>
+      </fieldset>
+    <% end %>
+  </div>
+</div>
