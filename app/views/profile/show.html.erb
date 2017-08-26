@@ -1,0 +1,40 @@
+<h2>Profile</h2>
+<hr>
+<!-- action button group -->
+<div class="action-button-group">
+  <div class="btn-group">
+    <button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+      <%= t('action') %> <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu" role="menu">
+      <li>
+        <%= link_to edit_profile_path, class: 'text-warning' do %>
+          <i class="fa fa-edit"></i>
+            edit
+        <% end %>
+      </li>
+    </ul>
+  </div>
+</div>
+<!-- end action button -->
+<br /><br />
+<div class="row">
+  <div class="col-lg-5">
+    <div class="well">
+      <dl class="dl-horizontal">
+        <dt>Email:</dt>
+          <dd><%= @profile.email %></dd>
+        <dt>First name:</dt>
+          <dd><%= @profile.first_name %></dd>
+        <dt>Last name:</dt>
+          <dd><%= @profile.last_name %></dd>
+        <dt>Nickname:</dt>
+          <dd><%= @profile.nickname %></dd>
+        <dt>Birthday:</dt>
+          <dd><%= @profile.birthday.strftime("%d/%m/%Y") %></dd>
+        <dt>Gender:</dt>
+          <dd><%= @profile.gender %></dd>
+      </dl>
+    </div>
+  </div>
+</div>

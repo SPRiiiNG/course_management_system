@@ -1,0 +1,81 @@
+<h2>Edit Profile</h2>
+<hr>
+<div class="row">
+  <div class="col-lg-6">
+    <%= form_for(@profile, url: profile_path(@profile)) do |f| %>
+      <fieldset>
+        <div class="row">
+          <div class="form-group">
+            <%= f.label :email, "Email", class: "col-lg-2 control-label" %>
+            <div class="col-lg-5">
+              <%= @profile.email %>
+            </div>
+          </div>
+        </div>
+        <br />
+        <div class="row">
+          <div class="form-group">
+            <%= f.label :first_name, "First name", class: "col-lg-2 control-label" %>
+            <div class="col-lg-5">
+              <%= f.text_field :first_name, autocomplete: "off", class: "form-control" %>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group">
+            <%= f.label :last_name, "Last name", class: "col-lg-2 control-label" %>
+            <div class="col-lg-5">
+              <%= f.text_field :last_name, autocomplete: "off", class: "form-control" %>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group">
+            <%= f.label :nickname, "Nickname", class: "col-lg-2 control-label" %>
+            <div class="col-lg-5">
+              <%= f.text_field :nickname, autocomplete: "off", class: "form-control" %>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group">
+            <%= f.label :birthday, "Birthday", class: "col-lg-2 control-label" %>
+            <div class="col-lg-5" class= "form-control">
+                <div class="form-group">
+                  <div class='input-group date' id='datetimepicker'>
+                      <%= f.text_field :birthday, value: @profile.birthday.strftime("%d/%m/%Y"), autocomplete: "off", class: "form-control" %>
+                      <!-- <input type='text' class="form-control" id="birthday" name="profile[birthday]" value="<%= @profile.birthday.strftime("%d/%m/%Y").to_json %>"/> -->
+                      <span class="input-group-addon">
+                          <span class="glyphicon glyphicon-calendar"></span>
+                      </span>
+                  </div>
+                </div>
+
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group">
+            <%= f.label :gender, "Gender", class: "col-lg-2 control-label" %>
+            <div class="col-lg-5">
+              <%= f.radio_button :gender, 'male' %>
+              <%= label :gender_male, 'Male' %>
+              <%= f.radio_button :gender, 'female' %>
+              <%= label :gender_female, 'Female' %>
+            </div>
+
+
+          </div>
+        </div>
+        <br /><br />
+
+        <div class="row">
+          <div class="form-group">
+            <%= f.submit 'Save', class: "btn btn-primary" %>
+            <%= link_to 'Cancel', profile_path , class: 'btn btn-default' %>
+          </div>
+        </div>
+      </fieldset>
+    <% end %>
+  </div>
+</div>

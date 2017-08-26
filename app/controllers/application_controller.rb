@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   include DeviseHelper
+  include RenderStatusHelper
   protect_from_forgery with: :exception
   before_action :authenticate_user!
   before_action :set_crumb
@@ -22,5 +23,9 @@ protected
     @breadcrumbs ||= []
     url = eval(url) if url =~ /_path|_url|@/
     @breadcrumbs << [name, url]
+  end
+
+  def check_authorized
+    render_forbidden unless current_user.instructor
   end
 end
