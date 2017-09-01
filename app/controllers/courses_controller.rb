@@ -2,7 +2,8 @@ class CoursesController < ApplicationController
   before_action :get_nav_data
   before_action :get_courses, only: [:index]
   before_action :check_authorized, except: [:index, :show]
-  before_action :get_course, only: [:edit, :show, :update ,:destroy]
+  before_action :get_course, only: :show
+  before_action :get_instructor_course, only: [:edit, :update, :destroy]
   before_action :get_categories_subjects_hash, only: [:new, :edit]
 
   def index
@@ -123,6 +124,11 @@ class CoursesController < ApplicationController
 
   def get_course
     @course = Course.find(params[:id]) rescue render_not_found
+    add_crumb @course.name, course_path(@course)
+  end
+
+  def get_instructor_course
+    @course = current_user.courses.find(params[:id]) rescue (render_not_found and return)
     add_crumb @course.name, course_path(@course)
   end
 

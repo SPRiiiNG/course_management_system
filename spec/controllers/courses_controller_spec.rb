@@ -63,7 +63,7 @@ RSpec.describe CoursesController, type: :controller do
         end
       end
 
-      it "should return http success and status 403" do
+      it "should return http failured and status 403" do
         sign_in_as(student) do
           get :edit,
             params: {
@@ -71,6 +71,18 @@ RSpec.describe CoursesController, type: :controller do
             }
           expect(response).not_to be_success
           expect(response.status).to eq(403)
+        end
+      end
+
+      it "shoud return http failured and status 404 if not access own course" do
+        instructor_1 = FactoryGirl.create(:user, instructor: true)
+        sign_in_as(instructor_1) do
+          get :edit,
+            params: {
+              id: course.id
+            }
+          expect(response).not_to be_success
+          expect(response.status).to eq(404)
         end
       end
     end
@@ -180,7 +192,7 @@ RSpec.describe CoursesController, type: :controller do
         end
       end
 
-      it "should update failured if subject is nil" do
+      it "should update failured if user role is student" do
         sign_in_as(student) do
           patch :update,
             params: {
@@ -196,6 +208,26 @@ RSpec.describe CoursesController, type: :controller do
             }
           expect(course.reload.subject).to eq(subject)
           expect(response.status).to eq(403)
+        end
+      end
+
+      it "should update failured if update not own course" do
+        instructor_1 = FactoryGirl.create(:user, instructor: true)
+        sign_in_as(instructor_1) do
+          patch :update,
+            params: {
+              id: course.id,
+              course: {
+                subject: course.subject.id.to_s,
+                name: 'asdasd',
+                description: course.description,
+                start_time: course.start_time,
+                end_time: course.end_time,
+                capacity: course.capacity
+              }
+            }
+          expect(course.reload.subject).to eq(subject)
+          expect(response.status).to eq(404)
         end
       end
     end
@@ -223,6 +255,19 @@ RSpec.describe CoursesController, type: :controller do
               }
           }.to change(instructor.courses, :count).by(0)
           expect(response.status).to eq(403)
+        end
+      end
+
+      it "shold destroy course failured if destroy not own course " do
+        instructor_1 = FactoryGirl.create(:user, instructor: true)
+        sign_in_as(instructor_1) do
+          expect {
+            delete :destroy,
+              params: {
+                id: course.id
+              }
+          }.to change(instructor.courses, :count).by(0)
+          expect(response.status).to eq(404)
         end
       end
     end

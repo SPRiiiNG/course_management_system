@@ -30,7 +30,7 @@ module RenderStatusHelper
 
   def render_not_found(message = "Not found", options = {})
     respond_to do |format|
-      format.any(:html, :xml, :csv, :xlsx) do
+      format.any(:html, :xml, :csv) do
         render file: "#{Rails.root}/public/404", layout: false, status: :not_found
       end
 
